@@ -16,35 +16,40 @@ const searchResults = (state = [], action) => {
     return state;
 }
 
+const favorites = (state = [], action) => {
+    if(action.type === 'SET_NEW_FAVORITE') {
+        return  action.payload;
+    }
+    return state;
+}
+
 function* watcherSaga() {
     //every action that matches 'GET_GIPHY' then runs the connected function
     yield takeEvery('FETCH_RESULTS', getResults);
-    //takeLast focuses on the last postElement
+   yield takeEvery('ADD_FAVORITE', postFavorite )
 }
 
 function* getResults(action) {
     console.log('in generator getResults');
-    
-    //make get request
     //try in this context affords the 'catch' here
     try {
-        // let query = action.payload
         const response = yield axios.put(`/api/search/${action.payload}`)
-        console.log(action.payload);
-        console.log(response);
-        
         console.log(response.data.data);
-        
-        // console.log(response.data.data.image_original_url );
-        //    and then save in redux
-        //   in this context is known as a "put"
         yield put({ type: 'SET_RESULTS', payload: response.data.data})
     } catch (error) {
         console.log('error with getGiphy', error);
-        
     }
 }
 
+function* postFavorite(action) {
+    console.log('in generator getResults');
+    //try in this context affords the 'catch' here
+    try {
+        const response = yield axios.put(`/api/search/${action.payload}`)
+        console.log(response.data.data);
+        yield put({ type: 'SET_RESULTS', payload: response})
+    //takeLast focuses on the last postElement
+}
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -52,6 +57,7 @@ const sagaMiddleware = createSagaMiddleware();
 const storeInstance = createStore(
     combineReducers({
         searchResults,
+        favorites
     }),
     applyMiddleware(sagaMiddleware, logger),
 );
@@ -60,4 +66,3 @@ sagaMiddleware.run(watcherSaga);
 
 ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
     document.getElementById('react-root'));
-
