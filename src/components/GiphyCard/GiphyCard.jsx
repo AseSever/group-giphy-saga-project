@@ -5,7 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+
 import Typography from '@material-ui/core/Typography';
 // import { useState } from 'react';
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 'auto',
+        width: 'auto',
         padding: 10
     },
     media: {
@@ -24,13 +24,14 @@ const useStyles = makeStyles({
 
 function GiphyCard(props) {
     const classes = useStyles();
-
+    console.log(props.gif.images);
+   
     return (
         <Card className={classes.root}>
             <CardActionArea>
-                <CardMedia
+                <CardMedia className={classes.media}
                     // type='gif'
-                    image={props.gif.url}
+                    image={`${props.gif.embed_url}`}
                     // className={classes.media}
                     title="temp placeholder"
                 />

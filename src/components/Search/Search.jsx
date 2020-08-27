@@ -1,39 +1,53 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid'
-import GiphyCard from '../GiphyCard/GiphyCard';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import { useEffect } from 'react';
 
-class Search extends Component {
-    getGifs = () => {
-        this.props.dispatch({type: 'FETCH_RESULTS', payload: 'bananas'})
-       //ask saga to make a get request
-       console.log(this.props.searchResults);
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      overflow: 'hidden',
+      backgroundColor: theme.palette.background.paper,
+    },
+    gridList: {
+      width: 500,
+      height: 450,
+    },
+}));
 
+
+function Search(props) {
+    const classes = useStyles();
+    const getGifs = () => {
+        props.dispatch({ type: 'FETCH_RESULTS', payload: 'bananas' })
+        //ask saga to make a get request
+        console.log(props.searchResults);
     }
-    componentDidMount =() => {
-        this.getGifs()
-    }
+    useEffect(getGifs, [])
 
-    render() {
+    console.log( props.searchResults.map(image => {
+        return image.images.original
+    }))
         return (
             <div>
-                  <div>
-                <Grid container>
-                    <Grid item xs={12}>
-                        {this.props.searchResults.map((gif, i ) => {
-                            return <GiphyCard
-                                style={{ margin: '3em' }}
-                                key={i}
-                                gif={gif}
-                              />
-                        })}
-                    </Grid>
-                </Grid>
-            </div>
+                <div className={classes.root}>
+                    <GridList cellHeight={160} className={classes.gridList} cols={3}>
+                        {props.searchResults.map((tile , i) => (
+                            <GridListTile key={i} cols={tile.cols || 1} >
+                                <img src={`${tile.images.original}`} alt={tile.title} />
+                            </GridListTile>
+                        ))}
+                    </GridList>
+                </div>
+
             </div>
         );
-    }
 }
+
 
 const mapPropsToState = (reduxState) => {
     return {
