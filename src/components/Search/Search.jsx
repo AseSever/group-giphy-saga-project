@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect } from 'react';
-import GiphyCard from '../GiphyCard/GiphyCard'
+import GiphyCard from '../GiphyCard/GiphyCard';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,12 +37,12 @@ function Search(props) {
                             />
                         })}
 
+
                 </div>
 
             </div>
         );
 }
-
 
 const mapPropsToState = (reduxState) => {
     return {
@@ -51,3 +51,4 @@ const mapPropsToState = (reduxState) => {
 }
 
 export default connect(mapPropsToState)(Search);
+

@@ -11,6 +11,9 @@ CREATE TABLE "category" (
 
 -- Default categories. You may change them :)
 INSERT INTO "category" ("name")
+<<<<<<< HEAD
+VALUES ('funny'), ('cute'), ('nsfw'), ('meme');
+=======
 VALUES ('funny'), ('cohort'), ('cartoon'), ('nsfw'), ('meme');
 
 CREATE TABLE "favorites" (
@@ -18,3 +21,4 @@ CREATE TABLE "favorites" (
 "category_id" INT REFERENCES "category",
 "url" VARCHAR(256) NOT NULL
 );
+>>>>>>> master

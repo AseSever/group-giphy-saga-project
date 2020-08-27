@@ -27,6 +27,7 @@ const useStyles = makeStyles({
 function GiphyCard(props) {
     const classes = useStyles();
 
+
     const favoriteIt = () => { 
         console.log("you favorited this!");
         props.dispatch({ type: 'ADD_FAVORITE', payload: ''})
@@ -45,32 +46,19 @@ function GiphyCard(props) {
                     <Typography gutterBottom variant="body2" component="h5">
                        {props.gif.title}
                     </Typography>
-
-                    <Typography variant="body2" color="textSecondary" component="h5">
-                        {/* This should be a description */}
-                    </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
             <Button size="small" color="primary" onClick={favoriteIt} > Favorite this! </Button>
-                {/* <Button variant="outlined" color="primary" onClick={favorite}>
-                    next photo </Button> */}
-
-            </CardActions>
-        </Card>
-    );
-}
+              
 
 
-const mapPropsToState = (reduxState) => {
-    return {
-        random: reduxState.random
-    }
-}
+<!-- 
 // const mapPropsToState = (reduxState) => {
 //     return {
 //         searchResults: reduxState.searchResults
 //     }
 // }
+ -->
 
-export default connect(mapPropsToState)(GiphyCard); 
+export default connect()(GiphyCard);
