@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import { useEffect } from 'react';
+import GiphyCard from '../GiphyCard/GiphyCard';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,30 +23,27 @@ function Search(props) {
     const classes = useStyles();
     const getGifs = () => {
         props.dispatch({ type: 'FETCH_RESULTS', payload: 'danger' })
-        //ask saga to make a get request
-        console.log(props.searchResults);
+
+
     }
+    //does essentially what componentdidMount does
     useEffect(getGifs, [])
 
-    console.log( props.searchResults.map(image => {
-        return image.images.original
-    }))
         return (
             <div>
                 <div className={classes.root}>
-                    <GridList cellHeight={160} className={classes.gridList} cols={3}>
-                        {props.searchResults.map((tile , i) => (
-                            <GridListTile key={i} cols={tile.cols || 1} >
-                                <img src={`${tile.images.original.url}`} alt={tile.title} />
-                            </GridListTile>
-                        ))}
-                    </GridList>
+                        {props.searchResults.map((gif , i) => {
+                            return <GiphyCard 
+                            key={i}  gif={gif}
+                            />
+                        })}
+
+
                 </div>
 
             </div>
         );
 }
-
 
 const mapPropsToState = (reduxState) => {
     return {
@@ -57,3 +52,4 @@ const mapPropsToState = (reduxState) => {
 }
 
 export default connect(mapPropsToState)(Search);
+
