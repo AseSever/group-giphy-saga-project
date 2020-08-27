@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 // import { useState } from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-˜
+
 const useStyles = makeStyles({
     root: {
         maxWidth: 450,
