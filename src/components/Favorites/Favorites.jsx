@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid'
 import Axios from 'axios';
-import { response } from 'express';
+// import { response } from 'express';
 import { connect } from 'react-redux';
 
 
@@ -31,8 +31,8 @@ class Favorites extends Component {
     }
 }
 
-const mapStateToProps = reduxState => ({
+const mapPropsToState = reduxState => ({
     reduxState
 });
 
-export default connect(mapStateToProps)(Favorites);
+export default connect(mapPropsToState)(Favorites);

@@ -17,8 +17,6 @@ const searchResults = (state = [], action) => {
 }
 
 const storeFavorites = (state = [], action) => {
-    // if(action.type === 'SET_FAVORITES') {
-        // return 
     switch (action.type) {
         case 'SET_FAVORITES':
             return action.payload;
@@ -31,7 +29,7 @@ const storeFavorites = (state = [], action) => {
 function* watcherSaga() {
     //every action that matches 'GET_GIPHY' then runs the connected function
     yield takeEvery('FETCH_RESULTS', getResults);
-    //takeLast focuses on the last postElement
+   yield takeEvery('ADD_FAVORITE', postFavorite )
 }
 
 function* getResults(action) {
@@ -40,7 +38,6 @@ function* getResults(action) {
     //make get request
     //try in this context affords the 'catch' here
     try {
-        // let query = action.payload
         const response = yield axios.put(`/api/search/${action.payload}`)
         console.log(action.payload);
         console.log(response);
@@ -57,6 +54,18 @@ function* getResults(action) {
     }
 }
 
+function* postFavorite(action) {
+    console.log('in generator getResults');
+    //try in this context affords the 'catch' here
+    try {
+        const response = yield axios.put(`/api/search/${action.payload}`)
+        console.log(response.data.data);
+        yield put({ type: 'SET_RESULTS', payload: response})
+    } catch (error) {
+        console.log('error with POST giphy', error);
+    }
+    //takeLast focuses on the last postElement
+}
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -64,6 +73,7 @@ const sagaMiddleware = createSagaMiddleware();
 const storeInstance = createStore(
     combineReducers({
         searchResults,
+        storeFavorites
     }),
     applyMiddleware(sagaMiddleware, logger),
 );

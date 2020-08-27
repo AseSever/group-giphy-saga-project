@@ -33,8 +33,8 @@ class App extends Component {
 
 }
 
-const mapStateToProps= reduxState => {(
-  reduxState
-)}
+// const mapPropsToState= reduxState => {(
+  // reduxState
+// )}
 
-export default connect(mapStateToProps)(App);
+export default connect()(App);
