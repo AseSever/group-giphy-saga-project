@@ -7,6 +7,7 @@ class Favorites extends Component {
         
         return (
             <div>
+                
             </div>
         );
     }

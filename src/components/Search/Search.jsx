@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 function Search(props) {
     const classes = useStyles();
     const getGifs = () => {
-        props.dispatch({ type: 'FETCH_RESULTS', payload: 'bananas' })
+        props.dispatch({ type: 'FETCH_RESULTS', payload: 'danger' })
         //ask saga to make a get request
         console.log(props.searchResults);
     }

@@ -31,8 +31,6 @@ function* getResults(action) {
         // let query = action.payload
         const response = yield axios.put(`/api/search/${action.payload}`)
         console.log(action.payload);
-        console.log(response);
-        
         console.log(response.data.data);
         
         // console.log(response.data.data.image_original_url );
