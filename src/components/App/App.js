@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Favorites from '../Favorites/Favorites';
 import Search from '../Search/Search';
@@ -12,6 +13,9 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Giphy Search</h1>
         </header>
+
+
+
         <Router>
           <ul className="nav">
             <li><Link to="/">Home</Link></li>
@@ -21,6 +25,7 @@ class App extends Component {
           <Route exact path="/search" component={Search} />
           <Route exact path="/favorites" component={Favorites} />
         </Router>
+
       </div>
     );
   }
