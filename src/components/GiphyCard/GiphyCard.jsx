@@ -9,7 +9,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
-
 const useStyles = makeStyles({
     root: {
         maxWidth: 450,
@@ -21,7 +20,6 @@ const useStyles = makeStyles({
         height: 300,
     },
 });
-
 
 function GiphyCard(props) {
     const classes = useStyles();
