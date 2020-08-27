@@ -25,12 +25,17 @@ function GiphyCard(props) {
     const classes = useStyles();
 
 
-    const favoriteIt = () => { 
+    const favoriteIt = () => {
         console.log("you favorited this!");
-        props.dispatch({ type: 'ADD_FAVORITE', payload: ''})
-    
+        props.dispatch({ type: 'ADD_FAVORITE', payload: '' })
+
     }
+<<<<<<< HEAD
   
+=======
+
+
+>>>>>>> 74a6f2dec4214a2ff14cd2af398066604a007a85
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -40,16 +45,29 @@ function GiphyCard(props) {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="body2" component="h5">
-                       {props.gif.title}
+                        {props.gif.title}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
+<<<<<<< HEAD
             <Button size="small" color="primary" onClick={favoriteIt} > Favorite this! </Button>
           </CardActions>
         </ Card>
     )
 }
+=======
+                <Button size="small" color="primary" onClick={favoriteIt}
+                >
+                    Favorite this!
+            </Button>
+            </CardActions>
+        </Card>
+    )
+}
+
+
+>>>>>>> 74a6f2dec4214a2ff14cd2af398066604a007a85
 
 
 

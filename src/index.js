@@ -47,7 +47,14 @@ function* postFavorite(action) {
     try {
         const response = yield axios.put(`/api/search/${action.payload}`)
         console.log(response.data.data);
+<<<<<<< HEAD
         yield put({ type: 'SET_RESULTS', payload: response});
+=======
+        yield put({ type: 'SET_RESULTS', payload: response})
+    } catch (error) {
+        console.log('error with POST giphy', error);
+    }
+>>>>>>> 74a6f2dec4214a2ff14cd2af398066604a007a85
     //takeLast focuses on the last postElement
     }catch (error) {
         console.log('error with postFavorite', error);

@@ -22,8 +22,9 @@ const useStyles = makeStyles((theme) => ({
 function Search(props) {
     const classes = useStyles();
     const getGifs = () => {
-        //ask saga to make a get request
-        props.dispatch({ type: 'FETCH_RESULTS', payload: 'tacos' })
+        props.dispatch({ type: 'FETCH_RESULTS', payload: 'danger' })
+
+
     }
     //does essentially what componentdidMount does
     useEffect(getGifs, [])

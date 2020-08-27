@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Favorites from '../Favorites/Favorites';
 import Search from '../Search/Search';
