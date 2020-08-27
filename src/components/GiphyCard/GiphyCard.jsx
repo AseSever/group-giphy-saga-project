@@ -13,7 +13,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 const useStyles = makeStyles({
     root: {
         maxWidth: 450,
-        maxWidth: 'auto',
         padding: 10,
         marginTop: '1em',
     },
@@ -34,7 +33,6 @@ function GiphyCard(props) {
     
     }
   
-
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -50,15 +48,11 @@ function GiphyCard(props) {
             </CardActionArea>
             <CardActions>
             <Button size="small" color="primary" onClick={favoriteIt} > Favorite this! </Button>
-              
+          </CardActions>
+        </ Card>
+    )
+}
 
 
-<!-- 
-// const mapPropsToState = (reduxState) => {
-//     return {
-//         searchResults: reduxState.searchResults
-//     }
-// }
- -->
 
 export default connect()(GiphyCard);

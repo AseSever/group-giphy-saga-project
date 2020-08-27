@@ -47,8 +47,11 @@ function* postFavorite(action) {
     try {
         const response = yield axios.put(`/api/search/${action.payload}`)
         console.log(response.data.data);
-        yield put({ type: 'SET_RESULTS', payload: response})
+        yield put({ type: 'SET_RESULTS', payload: response});
     //takeLast focuses on the last postElement
+    }catch (error) {
+        console.log('error with postFavorite', error);
+    }
 }
 
 const sagaMiddleware = createSagaMiddleware();
