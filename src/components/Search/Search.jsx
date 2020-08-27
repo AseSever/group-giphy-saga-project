@@ -38,7 +38,7 @@ function Search(props) {
                     <GridList cellHeight={160} className={classes.gridList} cols={3}>
                         {props.searchResults.map((tile , i) => (
                             <GridListTile key={i} cols={tile.cols || 1} >
-                                <img src={`${tile.images.original}`} alt={tile.title} />
+                                <img src={`${tile.images.original.url}`} alt={tile.title} />
                             </GridListTile>
                         ))}
                     </GridList>
