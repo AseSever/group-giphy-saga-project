@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('build'));
 
 /* Routes */
-app.use('/search', searchRouter);
+app.use('/api/search', searchRouter);
 app.use('/api/favorite', favoriteRouter);
 app.use('/api/category', categoryRouter);
 
