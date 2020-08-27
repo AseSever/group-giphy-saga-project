@@ -4,7 +4,7 @@ const axios = require('axios');
 
 require('dotenv').config();
 
-router.get('/', (req, res) => {
+router.get('/:query', (req, res) => {
     axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_KEY}`)
     .then(response => {
         console.log(response.data);
