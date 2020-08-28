@@ -12,6 +12,7 @@ import axios from 'axios';
 const searchResults = (state = [], action) => {
     if (action.type === 'SET_RESULTS') {
         return action.payload;
+        
     }
     return state;
 }
@@ -25,19 +26,30 @@ const addedFavorites = (state = [], action) => {
     return state
 }
 
-const categorys = (state = [], action) => {
-    if (action.type === 'SET_CATEGORY') {
-        return action.payload
-    }
-    return state
-}
+// const categorys = (state = [], action) => {
+//     if (action.type === 'SET_CATEGORY') {
+//         return action.payload
+//     }
+//     return state
+// }
 
 function* watcherSaga() {
     //every action that matches 'GET_GIPHY' then runs the connected function
     yield takeEvery('FETCH_RESULTS', getResults);
     yield takeEvery('ADD_FAVORITE', postFavorite);
     yield takeEvery('FETCH_FAVES', getFavorites);
-    yield takeEvery('FETCH_CATEGORY', getCategorys);
+    yield takeEvery('SET_CATEGORY', updateFavCategory);
+}
+
+function* updateFavCategory(action) {
+    try{
+        // target payload.id is the giphy favorite's id and payload.category is the category id
+        let payload = action.payload
+        yield axios.put(`/api/favorites`, payload)
+        
+    } catch (err) {
+        console.log('Error with updateFavCategory', err);
+    }
 }
 
 function* getResults(action) {
@@ -103,7 +115,6 @@ const storeInstance = createStore(
     combineReducers({
         searchResults,
         addedFavorites,
-        categorys
     }),
     applyMiddleware(sagaMiddleware, logger),
 );
