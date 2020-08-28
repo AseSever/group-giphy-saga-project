@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+
+import { connect } from 'react-redux';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Favorites from '../Favorites/Favorites';
 import Search from '../Search/Search';
@@ -28,4 +30,8 @@ class App extends Component {
 
 }
 
-export default App;
+// const mapPropsToState= reduxState => {(
+  // reduxState
+// )}
+
+export default connect()(App);

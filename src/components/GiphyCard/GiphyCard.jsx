@@ -28,6 +28,7 @@ function GiphyCard(props) {
         console.log("you favorited this!",  props.gif.images.original.url );
         props.dispatch({ type: 'ADD_FAVORITE', payload: props.gif.images.original.url})
     }
+
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -52,3 +53,4 @@ function GiphyCard(props) {
 
 
 export default connect()(GiphyCard);
+

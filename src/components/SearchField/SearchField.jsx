@@ -17,8 +17,9 @@ const SearchField = (props) => {
             <form className={"container"} onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="on" >
                 <TextField label="search" name="search"  className={'input'} 
                 inputRef={register} size="small" 
+
                 />
-                <Button type="submit" size="small" style={{marginTop: "1.25em" }}> Submit</Button>
+                <Button type="submit" size="small" style={{ marginTop: "1.25em" }}> Submit</Button>
             </form>
         </FormControl>
     );

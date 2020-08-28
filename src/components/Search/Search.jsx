@@ -30,6 +30,7 @@ function Search(props) {
         } else {
             props.dispatch({ type: 'FETCH_RESULTS', payload: searchText.search })
         }
+
     }
     //does essentially what componentdidMount does
     useEffect(getGifs, [])

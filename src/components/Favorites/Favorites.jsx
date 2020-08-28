@@ -36,6 +36,7 @@ const Favorites = (props) => {
                     key={i} url={(decodeURIComponent(gif.url))} id={gif.id}
                 />
             })}
+
             </div>
         </div>
     )
