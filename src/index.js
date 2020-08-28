@@ -39,7 +39,7 @@ function* watcherSaga() {
     yield takeEvery('ADD_FAVORITE', postFavorite);
     yield takeEvery('FETCH_FAVES', getFavorites);
     yield takeEvery('SET_CATEGORY', updateFavCategory);
-}
+
 
 function* updateFavCategory(action) {
     try{
@@ -98,13 +98,17 @@ function* getFavorites(action) {
     }
 }
 
-function* getCategorys() {
-    try {
-        const response = yield axios.get('/api/category')
-        console.log(response.data);
-        yield put({ type: 'SET_CATEGORY', payload: response.data })
+
+function* updateFavCategory(action) {
+    try{
+        // target payload.id is the giphy favorite's id and payload.category is the category id
+        let payload = action.payload;
+        console.log(payload);
+        
+        yield axios.put('/api/favorite', payload)
+        
     } catch (err) {
-        console.log('Error with getCategorys', err);
+        console.log('Error with updateFavCategory', err);
     }
 }
 

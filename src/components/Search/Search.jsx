@@ -28,7 +28,7 @@ function Search(props) {
         } else if (searchText.search === "" ){
             props.dispatch({ type: 'FETCH_RESULTS', payload: 'danger'})
         } else {
-        props.dispatch({ type: 'FETCH_RESULTS', payload: searchText.search })
+            props.dispatch({ type: 'FETCH_RESULTS', payload: searchText.search })
         }
 
     }
@@ -38,7 +38,6 @@ function Search(props) {
         return (
            <div>
                 <SearchField getGifs={getGifs} />
-           
                 <div className={classes.root}>
                    
                         {props.searchResults.map((gif , i) => {

@@ -33,7 +33,7 @@ const Favorites = (props) => {
             <div className={classes.root}>
             {props.addedFavorites.map((gif, i) => {
                 return <FavoritesCards
-                    key={i} url={ (decodeURIComponent(gif.url))}
+                    key={i} url={(decodeURIComponent(gif.url))} id={gif.id}
                 />
             })}
 
