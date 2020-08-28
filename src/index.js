@@ -10,34 +10,34 @@ import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 const searchResults = (state = [], action) => {
-    if(action.type === 'SET_RESULTS') {
-        return  action.payload;
-    } 
+    if (action.type === 'SET_RESULTS') {
+        return action.payload;
+    }
     return state;
 }
 
 const addedFavorites = (state = [], action) => {
-    if(action.type === 'SET_FAVORITE') {
-        return  [...state, action.payload];
-    } else if (action.type === 'GET_FAVORITES'){
+    if (action.type === 'SET_FAVORITE') {
+        return [...state, action.payload];
+    } else if (action.type === 'GET_FAVORITES') {
         return action.payload;
-        }
+    }
     return state
 }
 
-// const storeFavorites = (state = [], action) => {
-//     switch (action.type) {
-//         case 'SET_FAVORITES':
-//             return action.payload;
-//         default:
-//             return state;
-
+const categorys = (state = [], action) => {
+    if (action.type === 'SET_CATEGORY') {
+        return action.payload
+    }
+    return state
+}
 
 function* watcherSaga() {
     //every action that matches 'GET_GIPHY' then runs the connected function
     yield takeEvery('FETCH_RESULTS', getResults);
     yield takeEvery('ADD_FAVORITE', postFavorite);
-    yield takeEvery('FETCH_FAVES', getFavorites)
+    yield takeEvery('FETCH_FAVES', getFavorites);
+    yield takeEvery('FETCH_CATEGORY', getCategorys);
 }
 
 function* getResults(action) {
@@ -49,7 +49,6 @@ function* getResults(action) {
         const response = yield axios.put(`/api/search/${action.payload}`)
         console.log(action.payload);
         console.log(response);
-
         console.log(response.data.data);
 
         // console.log(response.data.data.image_original_url );
@@ -69,7 +68,7 @@ function* postFavorite(action) {
         let payload = encodeURIComponent(action.payload);
         console.log(payload);
         const response = yield axios.post(`/api/favorite/${payload}`)
-        yield put({ type: 'SET_NEW_FAVORITE', payload: response})
+        yield put({ type: 'SET_NEW_FAVORITE', payload: response })
     } catch (error) {
         console.log('error with POST giphy', error);
     }
@@ -81,9 +80,19 @@ function* getFavorites(action) {
     try {
         const response = yield axios.get(`/api/favorite`)
         console.log(response.data);
-        yield put({ type: 'GET_FAVORITES', payload: response.data})
+        yield put({ type: 'GET_FAVORITES', payload: response.data })
     } catch (error) {
         console.log('error with getFavorites', error);
+    }
+}
+
+function* getCategorys() {
+    try {
+        const response = yield axios.get('/api/category')
+        console.log(response.data);
+        yield put({ type: 'SET_CATEGORY', payload: response.data })
+    } catch (err) {
+        console.log('Error with getCategorys', err);
     }
 }
 
@@ -94,6 +103,7 @@ const storeInstance = createStore(
     combineReducers({
         searchResults,
         addedFavorites,
+        categorys
     }),
     applyMiddleware(sagaMiddleware, logger),
 );
