@@ -1,0 +1,11 @@
+.container {
+    display: flex inline;
+
+}
+
+.input {
+    /* width: 20ch; */
+    margin-left: 5em;
+    display: flex inline;
+    font-size: 16;
+}

@@ -1,38 +1,51 @@
-import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid'
-import Axios from 'axios';
-// import { response } from 'express';
+import React from 'react';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import FavoritesCards from '../FavoritesCards/FavoritesCards'
+import { useEffect } from 'react';
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        overflow: 'hidden',
+    },
+    gridList: {
+        width: 500,
+        height: 450,
+    },
+}));
 
-class Favorites extends Component {
-    
-    componentDidMount() {
-        this.getFaves();
+const Favorites = (props) => {
+    const classes = useStyles();
+    const getFaves = () => {
+        props.dispatch({ type: 'FETCH_FAVES'})
     }
+    useEffect(() => {
+        getFaves();
+        console.log('triggering useEffect');
+    }, []);
 
-    getFaves = () => {
-        Axios.get('/api/favorite')
-        .then((response) => {
-            this.props.dispatch({type: 'SET_FAVORITES', payload: response.data.data});
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
+    return (
+        <div >
+            <h1> Your Favorites! </h1>
+            <div className={classes.root}>
+            {props.addedFavorites.map((gif, i) => {
+                return <FavoritesCards
+                    key={i} url={ (decodeURIComponent(gif.url))}
+                />
+            })}
 
-    render() {
-        
-        return (
-            <div>
-                {/* {this.props.reduxState.} */}
-                <div>{JSON.stringify(this.props.reduxState)}</div>
             </div>
-        );
-    }
+        </div>
+    )
 }
 
-const mapPropsToState = reduxState => ({
-    reduxState
-});
+const mapPropsToState = (reduxState) => {
+    return {
+        addedFavorites: reduxState.addedFavorites
+    }
+}
 
 export default connect(mapPropsToState)(Favorites);

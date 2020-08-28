@@ -7,24 +7,36 @@ const router = express.Router();
 
 // return all favorite images
 router.get('/', (req, res) => {
-  console.log('GET faves');
-  let queryString = `SELECT * FROM "favorites" GROUP BY "category_id"`
-  pool.query(queryString, [req.params.id])
-    .then((result) => {
-      res.send(result.rows)
-      // res.sendStatus(200);
-    }).catch((error) => {
-      res.send(500);
+  const queryText = 'SELECT * FROM favorites';
+  pool.query(queryText)
+    .then((result) => { 
+      console.log(result.rows);
+      res.send(result.rows); 
     })
+    .catch((err) => {
+      console.log('Error completing SELECT favorites query', err);
+      res.sendStatus(500);
+    });
 });
 
+//   console.log('GET faves');
+//   let queryString = `SELECT * FROM "favorites" GROUP BY "category_id"`
+//   pool.query(queryString, [req.params.id])
+//     .then((result) => {
+//       res.send(result.rows)
+//       // res.sendStatus(200);
+//     }).catch((error) => {
+//       res.send(500);
+//     })
+
+
 // add a new favorite 
-router.post('/', (req, res) => {
-  const newFave = req.body
+router.post('/:url', (req, res) => {
+  const newFave = req.params.url
   const queryText = `INSERT INTO "favorites" ("url") 
                      VALUES ($1);`
   // change .url to the appropriate key to send to db 
-  pool.query(queryText, newFave.url)
+  pool.query(queryText, [newFave])
     .then(() => { res.sendStatus(201); })
     .catch((error) => {
       console.log('Error in POST route', error);
