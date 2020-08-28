@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect } from 'react';
 import GiphyCard from '../GiphyCard/GiphyCard';
+import SearchField from '../SearchField/SearchField'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -10,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
       flexWrap: 'wrap',
       justifyContent: 'space-around',
       overflow: 'hidden',
-      backgroundColor: theme.palette.background.paper,
     },
     gridList: {
       width: 500,
@@ -18,36 +18,42 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 function Search(props) {
     const classes = useStyles();
-    
-    const getGifs = () => {
-        props.dispatch({ type: 'FETCH_RESULTS', payload: 'danger' })
+
+    const getGifs = (searchText) => {
+        console.log(searchText);
+        if ( searchText === undefined){
+            props.dispatch({ type: 'FETCH_RESULTS', payload: 'danger'})
+        } else if (searchText.search === "" ){
+            props.dispatch({ type: 'FETCH_RESULTS', payload: 'danger'})
+        } else {
+        props.dispatch({ type: 'FETCH_RESULTS', payload: searchText.search })
+        }
 
     }
     //does essentially what componentdidMount does
     useEffect(getGifs, [])
 
         return (
-            <div>
+           <div>
+                <SearchField getGifs={getGifs} />
+           
                 <div className={classes.root}>
+                   
                         {props.searchResults.map((gif , i) => {
                             return <GiphyCard 
-                            key={i}  gif={gif}
+                            key={i}  gif={gif} 
                             />
                         })}
-
-
                 </div>
-
             </div>
         );
 }
 
 const mapPropsToState = (reduxState) => {
     return {
-        searchResults: reduxState.searchResults
+        searchResults: reduxState.searchResults,
     }
 }
 
