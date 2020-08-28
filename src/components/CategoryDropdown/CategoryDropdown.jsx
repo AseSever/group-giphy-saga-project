@@ -37,7 +37,7 @@ const CategoryDropdown = (props) => {
     return (
         <div>
             <FormControl className={classes.formControl}>
-                <InputLabel id="categories label">Age</InputLabel>
+                <InputLabel id="categories label">Category</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
