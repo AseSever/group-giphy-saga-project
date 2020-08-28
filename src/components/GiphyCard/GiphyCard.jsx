@@ -57,8 +57,9 @@ function GiphyCard(props) {
     )
 }
 
+const mapPropsToState = reduxState => ({
+    reduxState
+});
 
 
-
-
-export default connect()(GiphyCard);
+export default connect(mapPropsToState)(GiphyCard);
