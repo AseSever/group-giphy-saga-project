@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Search(props) {
     const classes = useStyles();
+
     const getGifs = (searchText) => {
         console.log(searchText);
         if ( searchText === undefined){
@@ -27,7 +28,7 @@ function Search(props) {
         } else if (searchText.search === "" ){
             props.dispatch({ type: 'FETCH_RESULTS', payload: 'danger'})
         } else {
-        props.dispatch({ type: 'FETCH_RESULTS', payload: searchText.search })
+            props.dispatch({ type: 'FETCH_RESULTS', payload: searchText.search })
         }
     }
     //does essentially what componentdidMount does
@@ -36,7 +37,6 @@ function Search(props) {
         return (
            <div>
                 <SearchField getGifs={getGifs} />
-           
                 <div className={classes.root}>
                    
                         {props.searchResults.map((gif , i) => {

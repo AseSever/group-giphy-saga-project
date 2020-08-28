@@ -7,15 +7,14 @@ import '../SearchField/SearchField.css';
 
 const SearchField = (props) => {
     const { handleSubmit, reset, register } = useForm();
-    const onSubmit = (data, e) => {
+    const onSubmit = (data) => {
         console.log(data)
         props.getGifs(data);
         reset();
     }
-    
     return (
         <FormControl >
-            <form className={"container"} onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off" >
+            <form className={"container"} onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="on" >
                 <TextField label="search" name="search"  className={'input'} 
                 inputRef={register} size="small" 
                 />
