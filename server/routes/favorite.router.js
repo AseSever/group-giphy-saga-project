@@ -1,5 +1,7 @@
 const express = require('express');
+const pg = require('pg');
 const pool = require('../modules/pool');
+const { setMaxListeners } = require('../modules/pool');
 
 const router = express.Router();
 
@@ -16,6 +18,17 @@ router.get('/', (req, res) => {
       res.sendStatus(500);
     });
 });
+
+//   console.log('GET faves');
+//   let queryString = `SELECT * FROM "favorites" GROUP BY "category_id"`
+//   pool.query(queryString, [req.params.id])
+//     .then((result) => {
+//       res.send(result.rows)
+//       // res.sendStatus(200);
+//     }).catch((error) => {
+//       res.send(500);
+//     })
+
 
 // add a new favorite 
 router.post('/:url', (req, res) => {

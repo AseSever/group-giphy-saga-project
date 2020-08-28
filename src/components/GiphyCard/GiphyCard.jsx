@@ -50,5 +50,4 @@ function GiphyCard(props) {
     )
 }
 
-
 export default connect()(GiphyCard);
