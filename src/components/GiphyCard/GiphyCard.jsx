@@ -33,7 +33,6 @@ function GiphyCard(props) {
 
     }
 
-
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -56,9 +55,6 @@ function GiphyCard(props) {
         </Card>
     )
 }
-
-
-
 
 
 export default connect()(GiphyCard);

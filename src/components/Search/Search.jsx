@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Search(props) {
     const classes = useStyles();
+    
     const getGifs = () => {
         props.dispatch({ type: 'FETCH_RESULTS', payload: 'danger' })
-
 
     }
     //does essentially what componentdidMount does
