@@ -12,14 +12,14 @@ const SearchField = (props) => {
         props.getGifs(data);
         reset();
     }
-    
+
     return (
         <FormControl >
             <form className={"container"} onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off" >
-                <TextField label="search" name="search"  className={'input'} 
-                inputRef={register} size="small" 
+                <TextField label="search" name="search" className={'input'}
+                    inputRef={register} size="small"
                 />
-                <Button type="submit" size="small" style={{marginTop: "1.25em" }}> Submit</Button>
+                <Button type="submit" size="small" style={{ marginTop: "1.25em" }}> Submit</Button>
             </form>
         </FormControl>
     );
