@@ -12,13 +12,15 @@ import axios from 'axios';
 const searchResults = (state = [], action) => {
     if(action.type === 'SET_RESULTS') {
         return  action.payload;
-    }
+    } 
     return state;
 }
 
-const favorites = (state = [], action) => {
-    if(action.type === 'SET_NEW_FAVORITE') {
-        return  action.payload;
+const addedFavorites = (state = [], action) => {
+    if(action.type === 'SET_FAVORITE') {
+        return  [...state, action.payload];
+    } else if (action.type === 'GET_FAVORITES'){
+        return action.payload;
     }
     return state;
 }
@@ -26,7 +28,8 @@ const favorites = (state = [], action) => {
 function* watcherSaga() {
     //every action that matches 'GET_GIPHY' then runs the connected function
     yield takeEvery('FETCH_RESULTS', getResults);
-   yield takeEvery('ADD_FAVORITE', postFavorite )
+    yield takeEvery('ADD_FAVORITE', postFavorite);
+    yield takeEvery('FETCH_FAVES', getFavorites)
 }
 
 function* getResults(action) {
@@ -42,22 +45,27 @@ function* getResults(action) {
 }
 
 function* postFavorite(action) {
-    console.log('in generator getResults');
+    console.log('in generator postFavorite');
     //try in this context affords the 'catch' here
     try {
-        const response = yield axios.put(`/api/search/${action.payload}`)
-        console.log(response.data.data);
-<<<<<<< HEAD
-        yield put({ type: 'SET_RESULTS', payload: response});
-=======
-        yield put({ type: 'SET_RESULTS', payload: response})
+        let payload = encodeURIComponent(action.payload);
+        console.log(payload);
+        const response = yield axios.post(`/api/favorite/${payload}`)
+        yield put({ type: 'SET_NEW_FAVORITE', payload: response})
     } catch (error) {
         console.log('error with POST giphy', error);
     }
->>>>>>> 74a6f2dec4214a2ff14cd2af398066604a007a85
-    //takeLast focuses on the last postElement
-    }catch (error) {
-        console.log('error with postFavorite', error);
+}
+
+function* getFavorites(action) {
+    console.log('in generator getFavorites');
+    //try in this context affords the 'catch' here
+    try {
+        const response = yield axios.get(`/api/favorite`)
+        console.log(response.data);
+        yield put({ type: 'GET_FAVORITES', payload: response.data})
+    } catch (error) {
+        console.log('error with getFavorites', error);
     }
 }
 
@@ -67,7 +75,7 @@ const sagaMiddleware = createSagaMiddleware();
 const storeInstance = createStore(
     combineReducers({
         searchResults,
-        favorites
+        addedFavorites,
     }),
     applyMiddleware(sagaMiddleware, logger),
 );
